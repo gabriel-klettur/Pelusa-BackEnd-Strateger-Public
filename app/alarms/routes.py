@@ -2,17 +2,15 @@
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Query       #FastAPI           
 from sqlalchemy.ext.asyncio import AsyncSession                             #Base de datos        
-from app.siteground.database import get_db_alarmas, get_db_estrategias      #Base de datos
+from app.siteground.database import get_db_alarmas                          #Base de datos
 
-from app.alarms.schemas import AlarmCreate, AlarmResponse                   #Schemas   
+from app.alarms.schemas import AlarmResponse                            #Schemas   
 from app.alarms.repositories import get_alarms                          #Base de datos
 
 from app.utils.ip_check import is_ip_allowed                                #Seguridad
-from app.alarms.utils import convierte_temporalidad                         #Utilidades
 
 from loguru import logger                                                   #Logging
 from typing import List                                                     #Tipado         
-from app.strateger.utils.orders import crear_operacion                      #Operaciones                        
 
 router = APIRouter()
 
