@@ -6,11 +6,12 @@ from fastapi.staticfiles import StaticFiles
 import asyncio
 from loguru import logger
 from contextlib import asynccontextmanager
-from app.siteground.database import close_db_connections, init_db_estrategias, init_db_diary, init_db_positions, init_db_accounts, init_db_kline_data, init_db_orders
+from app.siteground.database import close_db_connections, init_db_alarmas, init_db_estrategias, init_db_diary, init_db_positions, init_db_accounts, init_db_kline_data, init_db_orders
 from app.utils.server_status import log_server_status
 from app.server.middlewares import AllowedIPsMiddleware, InvalidRequestLoggingMiddleware, LogResponseMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.alarms.routes import router as alarms_router
 from app.bingx.bingx import router as bingx_router
 from app.strateger.strateger import router as strateger_router
 from app.server.routes import router as server_router
@@ -26,21 +27,16 @@ logger.add("logs/file_{time:YYYY-MM-DD}.log", rotation="00:00")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
-        logger.info("Initializing databases Strateger...")
-                
+        logger.info("Initializing databases...")
+        
+        #await init_db_alarmas()
         #await init_db_estrategias()       
-        logger.info("Strategies database: OK")
         #await init_db_diary() 
-        logger.info("Diary database: OK")
         #await init_db_positions()
-        logger.info("Positions database: OK")
         #await init_db_accounts()
-        logger.info("Accounts database: OK")
         #await init_db_kline_data()  
-        logger.info("KLine Data database: OK")
         #await init_db_orders()      
-        logger.info("Orders database: OK")
-        logger.info("All - Databases: OK")
+        logger.info("Databases: OK")
         
 
         # Iniciar la tarea en segundo plano
@@ -96,6 +92,7 @@ async def not_found_handler(request: Request, exc: HTTPException):
         content={"detail": "Not Found"}
     )
 
+app.include_router(alarms_router, prefix="/alarms", tags=["alarms"])
 app.include_router(bingx_router, prefix="/bingx", tags=["bingx"])
 app.include_router(strateger_router, prefix="/strateger", tags=["strateger"])
 app.include_router(server_router, prefix="/server", tags=["server"])

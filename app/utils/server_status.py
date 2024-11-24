@@ -6,7 +6,7 @@ from loguru import logger
 async def log_server_status():
     while True:
         try:            
-            logger.info("Strateger - Server is running smoothly")
+            logger.info("Server is running smoothly")
         except Exception as e:
-            logger.error(f"Strateger - Server status check failed: {e}")
+            logger.error(f"Server status check failed: {e}")
         await asyncio.sleep(60) 
