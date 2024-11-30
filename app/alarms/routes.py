@@ -50,8 +50,13 @@ async def get_alarms_endpoint(
         logger.warning(f"Unauthorized access attempt from {client_ip}")
         raise HTTPException(status_code=401, detail="Invalid or missing authentication token.")
 
-    # **403 Forbidden: IP not allowed**
-    await is_ip_allowed(client_ip)
+    # **403 Forbidden: IP not allowed (recheck)**
+    try:
+        await is_ip_allowed(client_ip)  # Validación adicional de la IP
+    except HTTPException:
+        logger.warning(f"IP {client_ip} bypassed middleware but was blocked at endpoint validation.")
+        raise HTTPException(status_code=403, detail="Access forbidden: Your IP is not allowed")
+
 
     # **200 OK or 500 Internal Server Error**
     try:
@@ -62,3 +67,5 @@ async def get_alarms_endpoint(
     except Exception as e:
         logger.error(f"Error fetching alarms: {e}")
         raise HTTPException(status_code=500, detail="Unexpected server error.")
+    
+
