@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List
 
 class PositionBase(BaseModel):
@@ -34,8 +34,7 @@ class PositionUpdate(PositionBase):
 class PositionInDB(PositionBase):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class PositionResponse(BaseModel):
     code: int
@@ -43,5 +42,4 @@ class PositionResponse(BaseModel):
     timestamp: int
     data: List[PositionInDB]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

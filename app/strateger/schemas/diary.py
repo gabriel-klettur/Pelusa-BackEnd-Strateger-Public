@@ -1,5 +1,5 @@
 # Path: app/strateger/schemas/diary.py
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List, Optional
 from datetime import datetime
 
@@ -19,5 +19,4 @@ class DiaryEntryUpdate(DiaryEntryBase):
 class DiaryEntry(DiaryEntryBase):
     id: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

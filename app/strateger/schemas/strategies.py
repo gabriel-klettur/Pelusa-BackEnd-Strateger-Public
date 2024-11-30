@@ -1,6 +1,6 @@
 #Path: app/strateger/schemas/strategies.py
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 class StrategyBase(BaseModel):
@@ -45,8 +45,7 @@ class StrategyUpdate(StrategyBase):
 class StrategyInDBBase(StrategyBase):
     id: int
 
-    class Config:
-        from_attributes = True  # Asegúrate de usar 'from_attributes' en lugar de 'orm_mode'
+    model_config = ConfigDict(from_attributes=True)
 
 class Strategy(StrategyInDBBase):
     pass

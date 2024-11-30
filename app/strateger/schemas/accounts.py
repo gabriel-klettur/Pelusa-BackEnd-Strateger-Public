@@ -1,6 +1,6 @@
 # Path: app/strateger/schemas/accounts.py
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from typing import Optional, List
 
@@ -19,8 +19,7 @@ class AccountBase(BaseModel):
 class AccountInDB(AccountBase):
     id: int
 
-    class Config:
-        from_attributes = True  # Use 'from_attributes' instead of 'orm_mode' in Pydantic V2
+    model_config = ConfigDict(from_attributes=True)
 
 class AccountListResponse(BaseModel):
     code: int
@@ -28,5 +27,4 @@ class AccountListResponse(BaseModel):
     timestamp: int
     data: List[AccountInDB]
 
-    class Config:
-        from_attributes = True  # Use 'from_attributes' instead of 'orm_mode' in Pydantic V2
+    model_config = ConfigDict(from_attributes=True)

@@ -1,6 +1,6 @@
 #Path: app/strateger/schemas/orders.py
 #Descripción: Esquemas de Pydantic para las órdenes
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 class OrderCreate(BaseModel):    
@@ -20,8 +20,7 @@ class OrderCreate(BaseModel):
     order_time: Optional[str] = None
     update_time: Optional[str] = None
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class OrderResponse(BaseModel):
     id: int
@@ -41,6 +40,5 @@ class OrderResponse(BaseModel):
     order_time: Optional[str] = None
     update_time: Optional[str] = None
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 

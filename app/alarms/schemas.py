@@ -1,6 +1,6 @@
 # Path: app/alarms/schemas.py
 # Descripción: Esquemas de Pydantic para las alarmas
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 class AlarmResponse(BaseModel):
@@ -14,5 +14,4 @@ class AlarmResponse(BaseModel):
     Order: str
     Strategy: Optional[str] = None
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

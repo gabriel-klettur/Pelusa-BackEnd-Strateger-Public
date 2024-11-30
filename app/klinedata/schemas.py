@@ -1,6 +1,6 @@
 # Path: app/klinedata/schemas.py
 
-from pydantic import BaseModel, constr
+from pydantic import BaseModel, constr, ConfigDict
 from enum import Enum
 
 class Interval(str, Enum):
@@ -24,5 +24,4 @@ class KlineDataCreate(BaseModel):
     volume: float
     time: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
