@@ -10,10 +10,15 @@ import json
 
 class AllowedIPsMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
-        client_ip = request.client.host        
+        # Extraer la IP de la cabecera X-Forwarded-For, si existe
+        forwarded_for = request.headers.get("X-Forwarded-For")
+        client_ip = forwarded_for if forwarded_for else request.client.host
+
+        # Verificar si la IP está en la lista permitida
         if client_ip not in settings.ALLOWED_IPS:
             logger.warning(f"Unauthorized IP {client_ip} attempted to access the service")
             return JSONResponse({"detail": "Access forbidden: Your IP is not allowed"}, status_code=403)
+
         response = await call_next(request)
         return response
 
