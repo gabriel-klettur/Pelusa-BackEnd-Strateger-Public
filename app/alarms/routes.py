@@ -24,7 +24,7 @@ Args:
     db (AsyncSession): Database session dependency.
     limit (int): The maximum number of alarms to return. Default is 10.
     offset (int): The number of alarms to skip before starting to collect the result set. Default is 0.
-    latest (bool): Flag to fetch only the latest alarms. Default is False.
+    latest (bool): The alarms will be ordered by their ID in descending order if True. Default is False.
 Returns:
     List[AlarmResponse]: A list of alarm responses.
 Raises:
