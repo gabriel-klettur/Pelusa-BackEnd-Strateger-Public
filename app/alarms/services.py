@@ -14,7 +14,7 @@ async def fetch_alarms(limit: int, offset: int, latest: bool, db: Session):
     Args:
         limit (int): The maximum number of alarms to fetch.
         offset (int): The number of alarms to skip before starting to fetch.
-        latest (bool): Whether to fetch the latest alarms.
+        latest (bool): If True, the alarms will be ordered by their ID in descending order.
         db (Session): The database session to use for fetching alarms.
 
     Returns:
