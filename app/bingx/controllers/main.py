@@ -8,7 +8,7 @@ from loguru import logger
 async def get_ticker_controller(client_ip: str, symbol: str):
     logger.info(f"Getting data for {symbol} from {client_ip}")
 
-    await is_ip_allowed(client_ip)
+    #await is_ip_allowed(client_ip)
     try:
         result = await get_ticker(symbol)
         return result
@@ -19,7 +19,7 @@ async def get_ticker_controller(client_ip: str, symbol: str):
 async def get_k_line_controller(client_ip: str, symbol: str, interval: str, limit: str, start_date: str, end_date: str):
     logger.info(f"Fetching K-Line data for {symbol} from {client_ip}")
 
-    await is_ip_allowed(client_ip)
+    #await is_ip_allowed(client_ip)
     try:       
         data = await get_k_line_data(symbol, interval, limit, start_date, end_date)
         return data
