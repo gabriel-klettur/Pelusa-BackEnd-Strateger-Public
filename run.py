@@ -21,6 +21,8 @@ if __name__ == "__main__":
             ssl_keyfile="C:\\certs\\key.pem",
             ssl_certfile="C:\\certs\\cert.pem",
             ssl_ca_certs="C:\\certs\\ca_bundle.pem",
+            http="h11"  # Protocolo compatible con HTTP/2
+            
         )
     except KeyboardInterrupt:
         logger.info("Server stopped by user (Ctrl+C)")
