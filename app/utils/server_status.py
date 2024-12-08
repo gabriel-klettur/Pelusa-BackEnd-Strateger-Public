@@ -9,4 +9,4 @@ async def log_server_status():
             logger.info("Server is running smoothly")
         except Exception as e:
             logger.error(f"Server status check failed: {e}")
-        await asyncio.sleep(60) 
+        await asyncio.sleep(1) 

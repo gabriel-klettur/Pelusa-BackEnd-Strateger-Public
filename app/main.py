@@ -8,7 +8,7 @@ from loguru import logger
 from contextlib import asynccontextmanager
 from app.siteground.database import close_db_connections, init_db_alarmas, init_db_estrategias, init_db_diary, init_db_positions, init_db_accounts, init_db_kline_data, init_db_orders
 from app.utils.server_status import log_server_status
-from app.server.middlewares import AllowedIPsMiddleware, InvalidRequestLoggingMiddleware, LogResponseMiddleware
+from app.server.middlewares import InvalidRequestLoggingMiddleware, LogResponseMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.alarms.routes import router as alarms_router
@@ -65,14 +65,18 @@ app.mount("/static", StaticFiles(directory=settings.UPLOAD_DIRECTORY), name="sta
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Permite solicitudes desde el frontend
+    allow_origins=[
+        "http://localhost:3000",  # Entorno de desarrollo
+        "https://beelzebot.com",  # Tu dominio frontend en producción
+	    "https://www.beelzebot.com",
+    ],
     allow_credentials=True,
     allow_methods=["*"],  # Permite todos los métodos (GET, POST, PUT, DELETE, etc.)
     allow_headers=["*"],  # Permite todos los encabezados
 )
 
 # Añadir el middleware de IPs permitidas
-app.add_middleware(AllowedIPsMiddleware)
+#app.add_middleware(AllowedIPsMiddleware)
 
 # Añadir el middleware de captura de solicitudes inválidas
 app.add_middleware(InvalidRequestLoggingMiddleware)

@@ -8,6 +8,7 @@ from app.config import settings
 from loguru import logger
 import json
 
+'''
 class AllowedIPsMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         # Extraer la IP de la cabecera X-Forwarded-For, si existe
@@ -21,6 +22,7 @@ class AllowedIPsMiddleware(BaseHTTPMiddleware):
 
         response = await call_next(request)
         return response
+'''
 
 class InvalidRequestLoggingMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
