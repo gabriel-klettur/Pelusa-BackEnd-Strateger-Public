@@ -12,7 +12,7 @@ from app.alarms.services import fetch_alarms                                # Se
 #from app.utils.ip_check import is_ip_allowed                                # Security
 
 from loguru import logger                                                   # Logging
-
+from datetime import datetime
 
 router = APIRouter()
 
@@ -42,7 +42,9 @@ async def get_alarms_endpoint(
     latest: bool = Query(default=False)
 ):
     client_ip = request.client.host
-    logger.info(f"Fetching alarms from {client_ip}")
+    #logger.info(f"Fetching alarms from {client_ip}")
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"[{current_time}] Fetching alarms from {client_ip}")
 
     '''
     # **401 Unauthorized: Token missing or invalid**

@@ -6,6 +6,9 @@ from starlette.responses import Response, JSONResponse
 from starlette.types import ASGIApp
 from app.config import settings
 from loguru import logger
+
+from datetime import datetime
+
 import json
 
 '''
@@ -49,6 +52,8 @@ class LogResponseMiddleware(BaseHTTPMiddleware):
         url = str(request.url)
         status_code = response.status_code
 
-        logger.info(f"Response to {client_ip} - {method} {url} - Status: {status_code}")
+        #logger.info(f"Response to {client_ip} - {method} {url} - Status: {status_code}")
+        #current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        #print(f"[{current_time}] Response to {client_ip} - {method} {url} - Status: {status_code}")
 
         return response
