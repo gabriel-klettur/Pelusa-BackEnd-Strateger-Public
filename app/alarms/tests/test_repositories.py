@@ -14,24 +14,22 @@ MOCK_ALARMS = [
         Ticker="BTCUSDT.PS",
         Temporalidad="1m",
         Quantity=0.01,
-        Entry_Price_Alert=67813.17,
-        Exit_Price_Alert=None,
+        Price_Alert=67813.17,        
         Time_Alert="2024-05-24 14:46:00",
         Order="open long",
         Strategy="Stochastic_v1",
-        raw_data='{"Ticker":"BTCUSDT.PS","Temporalidad":"1","Quantity":"0.01","Entry_Price_Alert":"67813.17","Exit_Price_Alert":null,"Time_Alert":"14:46:00_24/5/2024","Order":"open long","Strategy":"Stochastic_v1"}'
+        raw_data='{"Ticker":"BTCUSDT.PS","Temporalidad":"1","Quantity":"0.01","Price_Alert":"67813.17","Time_Alert":"14:46:00_24/5/2024","Order":"open long","Strategy":"Stochastic_v1"}'
     ),
     Alarm(
         id=8,
         Ticker="BTCUSDT.PS",
         Temporalidad="1m",
         Quantity=0.0073318072,
-        Entry_Price_Alert=68196.01,
-        Exit_Price_Alert=None,
+        Price_Alert=68196.01,        
         Time_Alert="2024-05-24 15:45:00",
         Order="open long",
         Strategy="Stochastic_v1",
-        raw_data='{"Ticker":"BTCUSDT.PS","Temporalidad":"1","Quantity":"0.0073318072","Entry_Price_Alert":"68196.01","Exit_Price_Alert":null,"Time_Alert":"15:45:00_24/5/2024","Order":"open long","Strategy":"Stochastic_v1"}'
+        raw_data='{"Ticker":"BTCUSDT.PS","Temporalidad":"1","Quantity":"0.0073318072","Price_Alert":"68196.01","Time_Alert":"15:45:00_24/5/2024","Order":"open long","Strategy":"Stochastic_v1"}'
     )
 ]
 
