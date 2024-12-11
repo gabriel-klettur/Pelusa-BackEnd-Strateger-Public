@@ -19,7 +19,7 @@ class Settings:
     ALLOWED_IPS = os.getenv("ALLOWED_IPS", "").split(",")
     BLOCKED_IPS = os.getenv("BLOCKED_IPS", "").split(",")
     UPLOAD_DIRECTORY = "./app/strateger/uploads/diary"
-
+    MODE_DEVELOPING = os.getenv("MODE_DEVELOPING", "false").strip().lower() in ["true", "1", "yes", "on"]
 
 settings = Settings()
 
