@@ -6,7 +6,7 @@ from typing import Optional
 class AlarmResponse(BaseModel):
     id: int
     Ticker: str
-    Temporalidad: str
+    Interval: str
     Quantity: Optional[str] = None
     Price_Alert: Optional[str] = None    
     Time_Alert: str
