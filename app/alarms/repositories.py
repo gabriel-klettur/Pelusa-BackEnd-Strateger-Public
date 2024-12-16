@@ -35,10 +35,10 @@ async def get_alarms(db: AsyncSession, limit: int = 10, offset: int = 0, latest:
     except SQLAlchemyError as e:
         # Manejo de errores específicos de SQLAlchemy
         logger.error(f"Database query failed: {e}")
-        raise HTTPException(status_code=500, detail="Database query failed")
+        raise HTTPException(status_code=520, detail="Database query failed")
     
     except Exception as e:
         # Manejo de errores generales
         logger.error(f"Unexpected error fetching alarms: {e}")
-        raise HTTPException(status_code=500, detail="Unexpected error occurred while fetching alarms")
+        raise HTTPException(status_code=530, detail="Unexpected error occurred while fetching alarms")
 
