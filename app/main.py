@@ -67,6 +67,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",  # Entorno de desarrollo
+        "http://192.168.1.7:3000",
+        "http://192.168.1.2:3000",
         "https://beelzebot.com",  # Tu dominio frontend en producción
 	    "https://www.beelzebot.com",
     ],
