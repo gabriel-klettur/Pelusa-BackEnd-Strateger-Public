@@ -9,10 +9,10 @@ from typing import List                                                     # Ty
 
 from app.alarms.services import fetch_alarms                                # Services
 
-from app.utils.ip_check import is_ip_allowed                                # Security
+#from app.utils.ip_check import is_ip_allowed                                # Security
 
 from loguru import logger                                                   # Logging
-
+from datetime import datetime
 
 router = APIRouter()
 
@@ -48,20 +48,26 @@ async def get_alarms_endpoint(
             - **500 Internal Server Error**: If an unexpected error occurs while fetching alarms.
     """
     client_ip = request.client.host
-    logger.info(f"Fetching alarms from {client_ip}")
+    #logger.info(f"Fetching alarms from {client_ip}")
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"[{current_time}] Fetching alarms from {client_ip}")
 
+    '''
     # **401 Unauthorized: Token missing or invalid**
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
         logger.warning(f"Unauthorized access attempt from {client_ip}")
         raise HTTPException(status_code=401, detail="Invalid or missing authentication token.")
+    '''
 
-    # **403 Forbidden: IP not allowed (recheck)**
+    '''
+    # **403 Forbidden: IP not allowed (recheck)**    
     try:
         await is_ip_allowed(client_ip)  # Validación adicional de la IP
     except HTTPException:
         logger.warning(f"IP {client_ip} bypassed middleware but was blocked at endpoint validation.")
         raise HTTPException(status_code=403, detail="Access forbidden: Your IP is not allowed")
+    '''
 
 
     # **200 OK or 500 Internal Server Error**
