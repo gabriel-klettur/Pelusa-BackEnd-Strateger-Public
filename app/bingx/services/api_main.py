@@ -39,13 +39,36 @@ async def get_k_line_data(symbol, interval, limit, start_time, end_time):
     payload = {}
     path = '/openApi/swap/v3/quote/klines'
     method = "GET"
-    paramsMap = {
-        "symbol": symbol,
-        "interval": interval,
-        "limit": limit,
-        "startTime": date_to_milliseconds(start_time),
-        "endTime": date_to_milliseconds(end_time)
-    }
+
+    print(f'start_time: {start_time}, end_time: {end_time}')
+
+    if(start_time == "None" and end_time == "None"):        
+        paramsMap = {
+            "symbol": symbol,
+            "interval": interval,
+            "limit": limit,                        
+        }            
+    elif(end_time == "None"):
+        paramsMap = {
+            "symbol": symbol,
+            "interval": interval,
+            "limit": limit,
+            "startTime": date_to_milliseconds(start_time),            
+        }        
+    elif(start_time == "None"):
+        paramsMap = {
+            "symbol": symbol,
+            "interval": interval,
+            "limit": limit,
+            "endTime": date_to_milliseconds(end_time),
+        }        
+    else:        
+        paramsMap = {
+            "symbol": symbol,
+            "interval": interval,
+            "limit": limit,
+            "startTime": date_to_milliseconds(start_time),
+            "endTime": date_to_milliseconds(end_time),
+        }
     paramsStr = parse_param(paramsMap)
     return send_request(method, path, paramsStr, payload)
-
