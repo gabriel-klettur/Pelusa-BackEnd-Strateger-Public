@@ -23,6 +23,8 @@ async def get_k_line_data_endpoint(request: Request, symbol: str, interval: str,
     Get K-Line data for a specific symbol.
     """
     client_ip = request.client.host    
+
+    
     return await get_k_line_controller(client_ip, symbol, interval, limit, start_date, end_date)
 
 @router.websocket("/ws")
@@ -37,7 +39,7 @@ async def websocket_endpoint(websocket: WebSocket):
             data = await websocket.receive_text()  # Recibe el mensaje del cliente
             # Convierte el mensaje JSON en un diccionario de Python
             params = json.loads(data)
-            print("Datos recibidos:", params)
+            #print("Datos recibidos:", params)
             
             # Extrae los parámetros enviados por el cliente
             symbol = params.get("symbol")

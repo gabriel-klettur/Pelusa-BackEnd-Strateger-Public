@@ -22,10 +22,11 @@ async def get_ticker_controller(client_ip: str, symbol: str):
 
 async def get_k_line_controller(client_ip: str, symbol: str, interval: str, limit: str, start_date: str, end_date: str):
     #logger.info(f"Fetching K-Line data for {symbol} from {client_ip}")
-    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"[{current_time}][{client_ip}] Fetching K-Line data for {symbol}")
+    #current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    #print(f"[{current_time}][{client_ip}] Fetching K-Line data for {symbol}")
 
     #await is_ip_allowed(client_ip)
+
     try:       
         data = await get_k_line_data(symbol, interval, limit, start_date, end_date)
         return data
