@@ -71,6 +71,7 @@ app.add_middleware(
         "http://192.168.1.2:3000",
         "https://beelzebot.com",  # Tu dominio frontend en producción
 	    "https://www.beelzebot.com",
+        "https://pelusa-front-end-strateger-public.vercel.app",        
     ],
     allow_credentials=True,
     allow_methods=["*"],  # Permite todos los métodos (GET, POST, PUT, DELETE, etc.)
