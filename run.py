@@ -27,9 +27,8 @@ if __name__ == "__main__":
                 host="0.0.0.0",
                 port=8000,
                 reload=True,
-                ssl_keyfile="C:\\certs\\key.pem",
-                ssl_certfile="C:\\certs\\cert.pem",
-                ssl_ca_certs="C:\\certs\\ca_bundle.pem",
+                ssl_keyfile="certs/key.pem",
+                ssl_certfile="certs/cert.pem",                
                 http="h11"  # Protocolo compatible con HTTP/2
                 
             )
