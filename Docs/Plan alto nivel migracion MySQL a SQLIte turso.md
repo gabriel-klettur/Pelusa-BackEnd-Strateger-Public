@@ -13,15 +13,21 @@
    - No se detectaron características exclusivas de MySQL (procedimientos almacenados ni triggers complejos).
    - Directorio `data_sqlite` preparado para almacenamiento de archivos .sqlite.
 
-2. **Diseño del esquema SQLite y scripts de transformación**
+2. **Diseño del esquema SQLite y scripts de transformación** ✅ Completado
    - Mapear tipos de datos y relaciones a estructuras compatibles con SQLite.
    - Elaborar scripts SQL para creación de tablas, índices y triggers.
 
-3. **Exportación y transformación de datos desde MySQL**
-   - Generar dumps o exportar datasets a CSV.
-   - Aplicar transformaciones necesarias (codificación, formatos de fecha, normalización).
+3. **Exportación y transformación de datos desde MySQL** ✅ Completado
+   - No hay datos previos; omitimos exportación y partimos de cero.
 
-4. **Configuración de Turso y provisión de la base de datos SQLite**
+4. **Configuración de Turso y provisión de la base de datos SQLite** ✅ Completado
+   - Variables de entorno `TURSO_AUTH_TOKEN` y `TURSO_DATABASE_URL` ya definidas en `.env`.
+   - **Requisito previo:** habilitar Windows Subsystem for Linux (WSL):
+     - https://learn.microsoft.com/en-us/windows/wsl/install
+     - https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-1---enable-the-windows-subsystem-for-linux
+     - https://www.reddit.com/r/bashonubuntuonwindows/comments/1by8mb3/wslregisterdistribution_failed_with_error/
+   - Autenticación CLI: `turso login --token $Env:TURSO_AUTH_TOKEN`.
+   - Crear instancias en Turso para cada base: alarms, estrategias, diary, positions, accounts, kline_data, orders.
    - Aprovisionar la instancia de SQLite en Turso.
    - Configurar accesos, backups automáticos y parámetros de rendimiento.
 

@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS diary_entries (
     titleName TEXT,
     text TEXT,
     photos TEXT,             -- JSON array de URLs o rutas relativas
-    references TEXT          -- JSON array de referencias externas
+    "references" TEXT          -- JSON array de referencias externas
 );
 
 -- Índice en la fecha para consultas cronológicas
