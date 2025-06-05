@@ -2,7 +2,7 @@
 # Descripción: SQLAlchemy models para las órdenes en la base de datos de Siteground
 
 from sqlalchemy import Column, Integer, String
-from app.siteground.base import BaseOrders
+from app.db.base import BaseOrders
 
 class Order(BaseOrders):
     __tablename__ = 'tbl_orders'

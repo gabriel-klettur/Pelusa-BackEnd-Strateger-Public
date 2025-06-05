@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Depends, Request, Query, HTTPException       # FastAPI           
 from sqlalchemy.ext.asyncio import AsyncSession                             # async SQLAlchemy, necesary for async operations
-from app.siteground.database import get_db_alarmas                          # get database session
+from app.db.database import get_db                                # database session
 
 from app.alarms.schemas import AlarmResponse                                # Schemas for alarms  
 from typing import List                                                     # Typing necessary for response model        
@@ -28,7 +28,7 @@ router = APIRouter()
 )
 async def get_alarms_endpoint(    
     request: Request,
-    db: AsyncSession = Depends(get_db_alarmas),
+    db: AsyncSession = Depends(get_db),
     limit: int = Query(default=10, ge=1, description="The maximum number of alarms to return."),
     offset: int = Query(default=0, ge=0, description="The number of alarms to skip before starting to collect the result set."),
     latest: bool = Query(default=False, description="If True, the alarms will be ordered by their ID in descending order.")
@@ -80,4 +80,3 @@ async def get_alarms_endpoint(
         logger.error(f"Error fetching alarms: {e}")
         raise HTTPException(status_code=500, detail="Unexpected server error.")
     
-

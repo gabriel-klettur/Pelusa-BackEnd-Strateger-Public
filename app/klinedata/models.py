@@ -1,7 +1,7 @@
 # Path: app/klinedata/models.py
 
 from sqlalchemy import Column, Integer, Float, String, BigInteger, UniqueConstraint
-from app.siteground.base import BaseKLineData
+from app.db.base import BaseKLineData
 
 class KlineData(BaseKLineData):
     __tablename__ = 'tbl_kline_data_btc'

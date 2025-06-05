@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
-from app.siteground.database import get_db_kline_data
+from app.db.database import get_db
 from app.klinedata.schemas import KlineDataCreate, Interval
 from app.klinedata.services import save_kline_data, get_kline_data
 from app.utils.ip_check import is_ip_allowed
@@ -17,7 +17,7 @@ import json
 router = APIRouter()
 
 @router.post("/create_kline_data", response_model=KlineDataCreate)
-async def create_kline_data(kline_data: KlineDataCreate, db: AsyncSession = Depends(get_db_kline_data)):
+async def create_kline_data(kline_data: KlineDataCreate, db: AsyncSession = Depends(get_db)):
     try:
         saved_kline_data = await save_kline_data(db, kline_data)
         return saved_kline_data
@@ -35,7 +35,7 @@ async def fill_kline_data_historical(
     interval: str,
     start_date: str,
     end_date: str,
-    db: AsyncSession = Depends(get_db_kline_data)
+    db: AsyncSession = Depends(get_db)
 ):
     client_ip = request.client.host
     
@@ -144,7 +144,7 @@ async def get_kline_data_endpoint(
     intervals: Interval, 
     start_date: str,
     end_date: str,
-    db: AsyncSession = Depends(get_db_kline_data), 
+    db: AsyncSession = Depends(get_db), 
     limit: int = Query(default=10000, ge=1)
 ):
     try:

@@ -1,7 +1,7 @@
 # Path: app/strateger/models/diary.py
 
 from sqlalchemy import Column, String, DateTime, JSON
-from app.siteground.base import BaseDiary
+from app.db.base import BaseDiary
 import uuid
 
 class DiaryEntry(BaseDiary):

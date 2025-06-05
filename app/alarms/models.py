@@ -2,7 +2,7 @@
 # Descripción: SQLAlchemy models para las alarmas en la base de datos de Siteground
 
 from sqlalchemy import Column, Integer, String
-from app.siteground.base import BaseAlarmas
+from app.db.base import BaseAlarmas
 
 class Alarm(BaseAlarmas):
     __tablename__ = 'tbl_alarms'

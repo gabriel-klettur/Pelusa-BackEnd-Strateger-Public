@@ -2,12 +2,11 @@
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.siteground.database import get_db_estrategias
+from app.db.database import get_db
 from app.strateger.schemas.backtesting import BacktestCreate, BacktestUpdate, Backtest
 from app.strateger.crud import backtesting as crud_backtesting
 from app.klinedata.schemas import Interval
 from app.klinedata.services import get_kline_data
-from app.siteground.database import get_db_kline_data
 from loguru import logger
 
 import pandas as pd
@@ -17,7 +16,7 @@ import numpy as np
 router = APIRouter()
 
 @router.post("/create_backtest", response_model=Backtest)
-async def create_backtest(backtest: BacktestCreate, db: AsyncSession = Depends(get_db_estrategias)):
+async def create_backtest(backtest: BacktestCreate, db: AsyncSession = Depends(get_db)):
     return await crud_backtesting.create_backtest(db, backtest)
 
 def crossover(series1, series2):
@@ -35,7 +34,7 @@ async def get_kline_data_endpoint(
     initial_balance: float = Query(default=10000),
     enable_long: bool = Query(default=True),  
     enable_short: bool = Query(default=True), 
-    db: AsyncSession = Depends(get_db_kline_data), 
+    db: AsyncSession = Depends(get_db), 
     limit: int = Query(default=10000, ge=1)
 ):
     """
@@ -192,4 +191,3 @@ async def get_kline_data_endpoint(
     except Exception as e:
         logger.error(f"Error fetching kline data: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
-

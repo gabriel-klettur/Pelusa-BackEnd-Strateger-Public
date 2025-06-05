@@ -72,7 +72,7 @@ Pelusa-BackEnd-Strateger-Public/
 │ ├── interactiveBrokers/ 
 │ ├── klinedata/ 
 │ ├── server/ 
-│ ├── siteground/ 
+│ ├── turso/ 
 │ ├── strateger/ 
 │ ├── utils/ 
 │ └── init.py 

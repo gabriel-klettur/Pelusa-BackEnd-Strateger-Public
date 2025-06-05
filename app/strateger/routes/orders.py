@@ -3,7 +3,7 @@
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Query       #FastAPI           
 from sqlalchemy.ext.asyncio import AsyncSession                             #Base de datos        
-from app.siteground.database import get_db_orders      #Base de datos
+from app.db.database import get_db      #Base de datos
 
 from app.strateger.schemas.orders import OrderCreate, OrderResponse                   #Schemas
 
@@ -19,7 +19,7 @@ router = APIRouter()
 @router.get("/list", response_model=List[OrderResponse])
 async def get_orders_endpoint(
     request: Request,
-    db: AsyncSession = Depends(get_db_orders),
+    db: AsyncSession = Depends(get_db),
     limit: int = Query(default=10, ge=1),  # Limit para el número de resultados por página
     offset: int = Query(default=0, ge=0),   # Offset para el desplazamiento
     latest: bool = Query(default=False)     # Parámetro para obtener las últimas alarmas
@@ -35,4 +35,3 @@ async def get_orders_endpoint(
     except Exception as e:
         logger.error(f"Error fetching orders: {e}")
         raise HTTPException(status_code=500, detail="There was an error fetching orders")
-

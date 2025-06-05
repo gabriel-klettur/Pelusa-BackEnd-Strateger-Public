@@ -3,7 +3,7 @@ import asyncio
 from app.bingx.services.api_usdtm import get_positions as get_positions_usdtm, get_balance_perp as get_balance_perp_usdtm
 from app.bingx.services.api_coinm import get_positions_perp_coinm, get_balance_perp_coinm
 from app.bingx.services.api_spot import get_balance_spot
-from app.siteground.database import get_db_positions, get_db_accounts
+from app.db.database import get_db
 from app.strateger.models.positions import Position
 from app.strateger.models.accounts import Account
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -114,10 +114,10 @@ async def background_tasks():
     interval = int(os.getenv('FETCH_INTERVAL', 3600))  # Fetch interval in seconds, default is 1 hour
     while True:
         try:
-            async for db in get_db_positions():
+            async for db in get_db():
                 await fetch_and_save_positions(db, get_positions_usdtm, "Main Account", "Perp USDT-M")
                 await fetch_and_save_positions(db, get_positions_perp_coinm, "Main Account", "Perp COIN-M")
-            async for db in get_db_accounts():
+            async for db in get_db():
                 await fetch_and_save_balance(db, get_balance_perp_usdtm, "Main Account", "Perp USDT-M")
                 await fetch_and_save_balance(db, get_balance_perp_coinm, "Main Account", "Perp COIN-M")
                 await fetch_and_save_balance(db, get_balance_spot, "Main Account", "Spot")

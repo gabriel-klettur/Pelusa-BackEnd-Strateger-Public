@@ -6,7 +6,7 @@ from fastapi.staticfiles import StaticFiles
 import asyncio
 from loguru import logger
 from contextlib import asynccontextmanager
-from app.siteground.database import close_db_connections, init_db_alarmas, init_db_estrategias, init_db_diary, init_db_positions, init_db_accounts, init_db_kline_data, init_db_orders
+from app.db.database import get_db, init_db, close_db
 from app.utils.server_status import log_server_status
 from app.server.middlewares import InvalidRequestLoggingMiddleware, LogResponseMiddleware
 from fastapi.middleware.cors import CORSMiddleware
@@ -29,13 +29,7 @@ async def lifespan(app: FastAPI):
     try:
         logger.info("Initializing databases...")
         
-        #await init_db_alarmas()
-        #await init_db_estrategias()       
-        #await init_db_diary() 
-        #await init_db_positions()
-        #await init_db_accounts()
-        #await init_db_kline_data()  
-        #await init_db_orders()      
+        await init_db()
         logger.info("Databases: OK")
         
 
@@ -51,7 +45,7 @@ async def lifespan(app: FastAPI):
     finally:
         logger.info("Shutting down...")
         try:
-            await close_db_connections()  # Asegúrate de cerrar las conexiones aquí
+            await close_db()  # Asegúrate de cerrar las conexiones aquí
         except Exception as e:
             logger.error(f"Error closing database connections: {e}")
 

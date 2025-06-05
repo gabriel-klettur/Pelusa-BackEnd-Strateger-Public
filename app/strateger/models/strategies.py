@@ -1,7 +1,7 @@
 #Path: app/strateger/models/strategies.py
 
 from sqlalchemy import Column, Integer, String, Boolean, Float, Text
-from app.siteground.base import BaseEstrategias
+from app.db.base import BaseEstrategias
 
 class Strategy(BaseEstrategias):
     __tablename__ = 'tbl_strategies'

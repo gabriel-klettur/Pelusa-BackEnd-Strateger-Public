@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Boolean, Integer, Float, BigInteger
-from app.siteground.base import BasePositions
+from app.db.base import BasePositions
 
 class Position(BasePositions):
     __tablename__ = 'tbl_positions'
