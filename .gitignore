@@ -155,3 +155,4 @@ cython_debug/
 #.idea/
 *.png
 run.py
+certs/
